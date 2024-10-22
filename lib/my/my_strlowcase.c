@@ -1,13 +1,16 @@
 /*
-** EPITECH PROJECT, 2023
-** CPoolDay07
+** EPITECH PROJECT, 2024
+** B-CPE-100-REN-1-1-cpoolday06-savinien.petitjean
 ** File description:
-** ./my_strlowcase.c
+** Task 1
 */
 
-
+#include "lib.h"
 
 char *my_strlowcase(char *str)
 {
-    return (0);
+    for (int i = 0; str[i]; i++)
+        if (isupper(str[i]))
+            str[i] += 32;
+    return (str);
 }

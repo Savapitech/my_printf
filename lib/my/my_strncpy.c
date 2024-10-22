@@ -1,20 +1,18 @@
 /*
-** EPITECH PROJECT, 2023
-** CPoolDay07
+** EPITECH PROJECT, 2024
+** B-CPE-100-REN-1-1-cpoolday06-savinien.petitjean
 ** File description:
-** ./my_strncpy.c
+** Task 2
 */
 
-
+#include "lib.h"
 
 char *my_strncpy(char *dest, char const *src, int n)
 {
     int i = 0;
 
-    while (i < n && src[i] != '\0') {
+    for (; i < n && src[i] != '\0'; i++)
         dest[i] = src[i];
-        i++;
-    }
     if (src[i] == '\0' && i < n)
         dest[i] = '\0';
     return dest;

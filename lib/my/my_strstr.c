@@ -1,13 +1,20 @@
 /*
-** EPITECH PROJECT, 2023
-** CPoolDay07
+** EPITECH PROJECT, 2024
+** B-CPE-100-REN-1-1-cpoolday06-savinien.petitjean
 ** File description:
-** ./my_strstr.c
+** Task 2
 */
 
-
+#include "lib.h"
 
 char *my_strstr(char *str, char const *to_find)
 {
-    return (0);
+    int find_len = my_strlen(to_find);
+
+    if (*to_find == '\0')
+        return str;
+    for (; *str != '\0'; str++)
+        if (!my_strncmp(str, to_find, find_len))
+            return str;
+    return NULL;
 }

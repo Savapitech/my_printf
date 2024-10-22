@@ -1,9 +1,11 @@
 /*
-** EPITECH PROJECT, 2023
+** EPITECH PROJECT, 2024
 ** CPoolDay07
 ** File description:
 ** ./my_strcat.c
 */
+
+#include "lib.h"
 
 char *my_strcat(char *dest, char const *src)
 {

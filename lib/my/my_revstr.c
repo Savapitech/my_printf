@@ -1,22 +1,21 @@
 /*
-** EPITECH PROJECT, 2023
-** CPoolDay07
+** EPITECH PROJECT, 2024
+** B-CPE-100-REN-1-1-cpoolday06-savinien.petitjean
 ** File description:
-** ./my_revstr.c
+** Task 3
 */
 
-
+#include "lib.h"
 
 char *my_revstr(char *str)
 {
-    int i;
-    char swap;
+    int len = my_strlen(str);
+    char copy;
 
-    for (i = 0; str[i] != '\0'; i++);
-    for (int j = 0; j < i / 2; j++) {
-        swap = str[j];
-        str[j] = str[i - j - 1];
-        str[i - j - 1] = swap;
+    for (int i = 0; i < len / 2; i++) {
+        copy = str[i];
+        str[i] = str[len - 1 - i];
+        str[len - 1 - i] = copy;
     }
-    return str;
+    return (str);
 }

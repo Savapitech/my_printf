@@ -1,9 +1,11 @@
 /*
-** EPITECH PROJECT, 2023
+** EPITECH PROJECT, 2024
 ** CPoolDay08
 ** File description:
 ** ./lin/my/my_show_word_array.c
 */
+
+#include "lib.h"
 
 int my_show_word_array(char *const *tab)
 {

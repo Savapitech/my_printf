@@ -13,6 +13,7 @@
 libmy.a
 
 # Build
+*.o
 *.out
 *.[aod]
 *.cor

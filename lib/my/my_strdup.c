@@ -1,9 +1,11 @@
 /*
-** EPITECH PROJECT, 2023
+** EPITECH PROJECT, 2024
 ** CPoolDay08
 ** File description:
 ** ./my_strdup.c
 */
+
+#include "lib.h"
 
 char *my_strdup(char const *src)
 {

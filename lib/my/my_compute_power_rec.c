@@ -1,9 +1,11 @@
 /*
-** EPITECH PROJECT, 2023
+** EPITECH PROJECT, 2024
 ** CPoolDay07
 ** File description:
 ** ./my_compute_power_rec.c
 */
+
+#include "lib.h"
 
 
 

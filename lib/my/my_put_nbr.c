@@ -1,28 +1,35 @@
 /*
-** EPITECH PROJECT, 2023
-** Pool 3
+** EPITECH PROJECT, 2024
+** SH_PUTNBR
 ** File description:
-** exo 7
+** Outputs a given int.
 */
 
-#include "../../include/my.h"
+#include "lib.h"
+
+static void my_put_positive(int nb, int *count)
+{
+    if (nb > 9)
+        my_put_positive(nb / 10, count);
+    my_putchar(nb % 10 + '0');
+    count++;
+}
 
 int my_put_nbr(int nb)
 {
-    int i = 1;
+    int output = nb;
     int count = 0;
 
     if (nb < 0) {
         my_putchar('-');
         count++;
-        nb *= -1;
+        output = -nb;
     }
-    while ((nb / i) >= 10)
-        i *= 10;
-    while (i > 0) {
-        my_putchar((nb / i) % 10 + '0');
-        count++;
-        i /= 10;
-    }
-    return (count);
+    if (output < 0) {
+        output = -(output / 10);
+        my_put_positive(output, &count);
+        my_put_positive(-(nb % 10), &count);
+    } else
+        my_put_positive(output, &count);
+    return (0);
 }

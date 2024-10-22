@@ -1,17 +1,15 @@
 /*
-** EPITECH PROJECT, 2023
+** EPITECH PROJECT, 2024
 ** CPoolDay07
 ** File description:
 ** ./my_putstr.c
 */
 
+#include "lib.h"
+
 int my_putstr(char const *str)
 {
-    int count = 0;
-
-    for (int i = 0;  str[i] != '\0'; i++) {
+    for (int i = 0; str[i] != '\0'; i++)
         my_putchar(str[i]);
-        count++;
-    }
-    return (count);
+    return (0);
 }
