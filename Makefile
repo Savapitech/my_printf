@@ -1,30 +1,31 @@
 ##
-## EPITECH PROJECT, 2023
-## miniprintf
+## EPITECH PROJECT, 2024
+## Makefile
 ## File description:
-## ./Makefile
+## Makefile to build project
 ##
 
 NAME	=	libmy.a
 
-SRCS = $(wildcard src/*.c)
-SRCS += $(wildcard src/handler/*.c)
+SRCS = $(wildcard lib/my/*.c)
+
+OBJS	=	$(SRCS:.c=.o)
 
 CC = gcc
+
+CFLAGS = -c
 
 all:  $(NAME)
 
 $(NAME):	$(OBJS)
-	$(CC) -Wall -Wextra -c $(SRCS) -Iinclude
-	ar rc $(NAME) *.o
+	$(CC) $(CFLAGS) $(SRCS) -Iinclude
+	ar rc $(NAME) $(OBJS)
 
 clean:
 	$(RM) *.o
+	$(RM) $(OBJS)
 
 fclean:	clean
 	$(RM) $(NAME)
 
 re:	fclean all
-
-test: re
-	gcc tests/*.c -L. -lmy -Iinclude -o test
