@@ -4,7 +4,6 @@
 ** File description:
 ** display the number given as parameter
 */
-#include<unistd.h>
 #include "printf.h"
 
 static void baby_putchar(char c)
