@@ -12,7 +12,7 @@ int my_printf(char *fmt, ...)
     va_list args;
     int result = 0;
 
-    if(!fmt)
+    if (!fmt)
         return EXIT_ERROR;
     va_start(args, fmt);
     result = parser(fmt, args);
