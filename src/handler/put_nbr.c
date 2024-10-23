@@ -4,7 +4,7 @@
 ** File description:
 ** display the number given as parameter
 */
-#include "../include/libmy.h"
+#include "printf.h"
 
 int printf_put_nbr(int nb)
 {
