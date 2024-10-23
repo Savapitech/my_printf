@@ -11,7 +11,8 @@ static void baby_putchar(char c)
     write(1, &c, 1);
 }
 
-int printf_put_nbr(int nb)
+static
+int baby_put_nbr(int nb)
 {
     if (nb < 0) {
         baby_putchar('-');
@@ -20,8 +21,13 @@ int printf_put_nbr(int nb)
     if (nb < 10) {
         baby_putchar(nb + '0');
     } else {
-        printf_put_nbr(nb / 10);
+        baby_put_nbr(nb / 10);
         baby_putchar(nb % 10 +'0');
     }
-    return 0;
+    return 0; 
+}
+
+int printf_put_nbr(va_list args)
+{
+    return baby_put_nbr(va_arg(args, int));
 }

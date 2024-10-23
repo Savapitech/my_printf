@@ -12,6 +12,8 @@ const handler_t HANDLERS[] = {
     { '%', &printf_putpercentage },
     { 'c', &printf_putchar },
     { 's', &printf_putstr },
+    { 'd', &printf_put_nbr },
+    { 'i', &printf_put_nbr },
     { '\0', NULL }
 };
 

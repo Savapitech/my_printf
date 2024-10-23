@@ -3,5 +3,5 @@
 
 void main(void)
 {
-    my_printf("The word %s has %c characters. %%\n", "EPITECH", '7');
+    my_printf("The word %s has %d characters. %%\n", "EPITECH", 7);    
 }

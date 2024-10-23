@@ -17,6 +17,7 @@ int parser(char *fmt, va_list args);
 int printf_putchar(va_list args);
 int printf_putstr(va_list args);
 int printf_putpercentage(va_list args);
+int printf_put_nbr(va_list args);
 
 typedef struct {
     char flag;
