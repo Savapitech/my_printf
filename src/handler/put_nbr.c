@@ -26,8 +26,3 @@ int printf_put_nbr(int nb)
     }
     return 0;
 }
-
-int main(void)
-{
-    printf_put_nbr(42);
-}
