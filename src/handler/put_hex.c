@@ -5,6 +5,7 @@
 ** display an int in hexadecimal format
 */
 #include <unistd.h>
+#include "printf.h"
 
 static
 void baby_putchar(char c)

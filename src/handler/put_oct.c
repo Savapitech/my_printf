@@ -18,9 +18,9 @@ int baby_put_oct(int nb)
     while (nb != 0) {
         result = nb % 8;
         if (result < 10)
-            my_putchar(result + 48);
+            baby_putchar(result + 48);
         else
-            my_putchar(result + 87);
+            baby_putchar(result + 87);
         nb = nb / 8;
     }
     return (0);
