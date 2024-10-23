@@ -24,7 +24,7 @@ int baby_put_nbr(int nb)
         baby_put_nbr(nb / 10);
         baby_putchar(nb % 10 +'0');
     }
-    return 0; 
+    return 0;
 }
 
 int printf_put_nbr(va_list args)
