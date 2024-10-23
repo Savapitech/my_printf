@@ -32,7 +32,6 @@ result
 *.gc??
 testcmd
 tester.sh
-tests
 unit_tests
 
 # Python (CI)
