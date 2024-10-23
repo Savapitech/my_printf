@@ -29,5 +29,5 @@ int baby_put_oct(int nb)
 
 int printf_put_oct(va_list args)
 {
-    return baby_put_oct(va_arg(arg, int));
+    return baby_put_oct(va_arg(args, int));
 }
