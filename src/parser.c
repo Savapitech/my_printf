@@ -14,6 +14,10 @@ const handler_t HANDLERS[] = {
     { 's', &printf_putstr },
     { 'd', &printf_put_nbr },
     { 'i', &printf_put_nbr },
+    { 'u', &printf_put_unsigned_nbr },
+    { 'x', &printf_put_hex },
+    { 'X', &printf_put_hex },
+    { 'o', &printf_put_oct },
     { '\0', NULL }
 };
 
