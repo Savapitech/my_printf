@@ -9,14 +9,14 @@
 int printf_put_nbr(int nb)
 {
     if (nb < 0) {
-        my_putchar('-');
+        write(1, '-', 1);
         nb *= -1;
     }
     if (nb < 10) {
-        my_putchar(nb + '0');
+        write(1, nb + '0', 1);
     } else {
-        my_put_nbr(nb / 10);
-        my_putchar(nb % 10 +'0');
+        printf_put_nbr(nb / 10);
+        write(1, nb % 10 +'0', 1);
     }
     return 0;
 }
