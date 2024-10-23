@@ -6,7 +6,7 @@
 */
 #include "../include/libmy.h"
 
-int my_put_nbr(int nb)
+int printf_put_nbr(int nb)
 {
     if (nb < 0) {
         my_putchar('-');
