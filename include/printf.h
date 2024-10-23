@@ -18,6 +18,9 @@ int printf_putchar(va_list args);
 int printf_putstr(va_list args);
 int printf_putpercentage(va_list args);
 int printf_put_nbr(va_list args);
+int printf_put_unsigned_nbr(va_list args);
+int printf_put_hex(va_list args);
+int printf_put_oct(va_list args);
 
 typedef struct {
     char flag;
