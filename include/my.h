@@ -23,8 +23,16 @@ int printf_put_hex(va_list args);
 int printf_put_oct(va_list args);
 int baby_put_hex(int nb);
 int printf_put_pointer(va_list args);
+<<<<<<< HEAD:include/my.h
 int baby_put_hex(int nb);
 int printf_put_pointer(va_list args);
+=======
+int baby_strlen(char *str);
+char *baby_revstr(char *str);
+void baby_putchar(char c);
+void baby_putstr(char *c);
+int baby_intlen(int nb);
+>>>>>>> 0f6fd22 (add: make many babies):include/printf.h
 
 typedef struct {
     char flag;
