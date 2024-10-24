@@ -4,8 +4,8 @@
 ** File description:
 ** display an int in hexadecimal format
 */
-#include <unistd.h>
-#include "printf.h"
+
+#include "my.h"
 
 static
 void baby_putchar(char c)

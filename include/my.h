@@ -5,8 +5,8 @@
 ** printf.h
 */
 
-#ifndef PRINTF_H_
-    #define PRINTF_H_
+#ifndef MY_H_
+    #define MY_H_
     #include <unistd.h>
     #include <stdarg.h>
     #include <stdlib.h>
@@ -28,4 +28,4 @@ typedef struct {
     char flag;
     int (*ptr)(va_list args);
 } handler_t;
-#endif /* PRINTF_H_ */
+#endif /* MY_H_ */
