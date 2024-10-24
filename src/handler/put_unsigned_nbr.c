@@ -4,8 +4,8 @@
 ** File description:
 ** display an unsigned number given as parameter
 */
-#include <unistd.h>
-#include "../../include/printf.h"
+
+#include "my.h"
 
 static
 void baby_putchar(char c)

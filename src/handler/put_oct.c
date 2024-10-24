@@ -4,8 +4,8 @@
 ** File description:
 ** display an int given as parameter in octal format
 */
-#include <unistd.h>
-#include "printf.h"
+
+#include "my.h"
 
 void baby_putchar(char c)
 {

@@ -4,7 +4,8 @@
 ** File description:
 ** display the number given as parameter
 */
-#include "printf.h"
+
+#include "my.h"
 
 static void baby_putchar(char c)
 {
