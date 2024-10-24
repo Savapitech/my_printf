@@ -5,7 +5,8 @@
 ** display the adress given as parameter
 ** in the hexadecimal format
 */
-#include "printf.h"
+
+#include "my.h"
 
 int printf_put_pointer(va_list args)
 {
