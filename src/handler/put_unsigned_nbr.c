@@ -16,7 +16,7 @@ void baby_putchar(char c)
 static
 int baby_put_unsigned_nbr(unsigned int nb)
 {
-    if (nb < 0) {
+    if (nb <= 1) {
         baby_putchar('-');
         nb *= -1;
     }

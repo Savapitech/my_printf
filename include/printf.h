@@ -21,6 +21,8 @@ int printf_put_nbr(va_list args);
 int printf_put_unsigned_nbr(va_list args);
 int printf_put_hex(va_list args);
 int printf_put_oct(va_list args);
+int baby_put_hex(int nb);
+int printf_put_pointer(va_list args);
 
 typedef struct {
     char flag;

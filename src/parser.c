@@ -18,6 +18,7 @@ const handler_t HANDLERS[] = {
     { 'x', &printf_put_hex },
     { 'X', &printf_put_hex },
     { 'o', &printf_put_oct },
+    { 'p', &printf_put_pointer },
     { '\0', NULL }
 };
 
