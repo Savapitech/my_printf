@@ -11,5 +11,6 @@ int printf_putchar(va_list args)
 {
     int c = va_arg(args, int);
 
-    return (write(STDOUT_FILENO, &c, sizeof(char)));
+    return (write(STDOUT_FILENO, &c, sizeof c) == sizeof c)
+        ? (int)(sizeof c) : EXIT_ERROR;
 }
