@@ -4,12 +4,7 @@
 ** File description:
 ** display an int given as parameter in octal format
 */
-<<<<<<< HEAD
-
 #include "my.h"
-=======
-#include "printf.h"
->>>>>>> 0f6fd22 (add: make many babies)
 
 int baby_put_oct(int nb)
 {
