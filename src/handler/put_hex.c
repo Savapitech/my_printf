@@ -16,7 +16,7 @@ void baby_putchar(char c)
 int baby_put_hex(int nb)
 {
     int result = nb;
-    char *str = malloc(sizeof(char) * my_strlen())
+    char *str = malloc(sizeof(char) * my_strlen());
 
     while (nb != 0) {
         result = nb % 16;
