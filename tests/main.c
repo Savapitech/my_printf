@@ -1,7 +1,11 @@
 #include "my.h"
 #include <string.h>
+#include <stdio.h>
 
 void main(void)
 {
-    my_printf("The word %s has %u characters. %%\n", "EPITECH", 2147483648);    
+    int a = 42;
+
+    my_printf("The word %s has %p characters. %%\n", "EPITECH", &a);
+    //printf("%p", &a);
 }

@@ -8,15 +8,9 @@
 #include "my.h"
 
 static
-void baby_putchar(char c)
-{
-    write(1, &c, 1);
-}
-
-static
 int baby_put_unsigned_nbr(unsigned int nb)
 {
-    if (nb < 0) {
+    if (nb <= 1) {
         baby_putchar('-');
         nb *= -1;
     }

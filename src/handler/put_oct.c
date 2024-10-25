@@ -4,26 +4,19 @@
 ** File description:
 ** display an int given as parameter in octal format
 */
-
 #include "my.h"
-
-void baby_putchar(char c)
-{
-    write(1, &c, 1);
-}
 
 int baby_put_oct(int nb)
 {
     int result = nb;
+    char str[baby_intlen(nb)];
 
-    while (nb != 0) {
+    for (int i = 0; nb != 0; i++) {
         result = nb % 8;
-        if (result < 10)
-            baby_putchar(result + 48);
-        else
-            baby_putchar(result + 87);
-        nb = nb / 8;
+        str[i] = (result + 48);
     }
+    baby_revstr(str);
+    baby_putstr(str);
     return (0);
 }
 
