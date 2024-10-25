@@ -7,11 +7,6 @@
 
 #include "my.h"
 
-static void baby_putchar(char c)
-{
-    write(1, &c, 1);
-}
-
 static
 int baby_put_nbr(int nb)
 {

@@ -7,12 +7,6 @@
 
 #include "my.h"
 
-static
-void baby_putchar(char c)
-{
-    write(1, &c, 1);
-}
-
 int baby_put_hex(int nb)
 {
     int result = nb;
