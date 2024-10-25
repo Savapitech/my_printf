@@ -25,9 +25,11 @@ int baby_put_hex(int nb);
 int printf_put_pointer(va_list args);
 int baby_strlen(char *str);
 char *baby_revstr(char *str);
-void baby_putchar(char c);
-void baby_putstr(char *c);
+int baby_putchar(char c);
+int baby_putstr(char *c);
+int baby_strlen(char *str);
 int baby_intlen(int nb);
+int printf_put_float(va_list args);
 
 typedef struct {
     char flag;

@@ -7,8 +7,10 @@
 
 int baby_intlen(int nb)
 {
+    int i = 0;
+
     nb = (float)nb;
-    for (int i = 0; nb > 1; i++)
-        nb / 10;
+    for (; nb > 1; i++)
+        nb /= 10;
     return i;
 }

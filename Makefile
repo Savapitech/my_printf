@@ -9,6 +9,7 @@ NAME	=	libmy.a
 
 SRCS = $(wildcard src/*.c)
 SRCS += $(wildcard src/handler/*.c)
+SRCS += $(wildcard src/baby/*.c)
 
 CC = gcc
 

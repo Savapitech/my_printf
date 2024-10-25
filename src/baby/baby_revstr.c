@@ -4,7 +4,8 @@
 ** File description:
 ** reverse an str given as parameter
 */
-#include "printf.h"
+
+#include "my.h"
 
 char *baby_revstr(char *str)
 {
