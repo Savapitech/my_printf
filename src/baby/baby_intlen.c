@@ -4,13 +4,14 @@
 ** File description:
 ** count the decimal of an int given as parameter
 */
+#include <stdint.h>
+#include <stdlib.h>
 
-int baby_intlen(int nb)
+size_t baby_intlen(size_t nb, int base)
 {
     int i = 0;
 
-    nb = (float)nb;
-    for (; nb > 1; i++)
-        nb /= 10;
+    for (; nb != 0; i++)
+        nb /= base;
     return i;
 }
