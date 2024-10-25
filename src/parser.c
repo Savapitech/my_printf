@@ -42,7 +42,7 @@ int parser(char *fmt, va_list args)
             count++;
             continue;
         }
-        args_parser(fmt, args);
+        count += args_parser(fmt, args);
         fmt++;
     }
     return count;

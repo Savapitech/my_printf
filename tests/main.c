@@ -6,6 +6,6 @@ void main(void)
 {
     int a = 42;
 
-    my_printf("The word %s has %p characters. %%\n", "EPITECH", &a);
+    my_printf("%c", 'M');
     //printf("%p", &a);
 }

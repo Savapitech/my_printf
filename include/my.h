@@ -9,8 +9,6 @@
     #define MY_H_
     #include <unistd.h>
     #include <stdarg.h>
-    #include <stdlib.h>
-    #include <stddef.h>
     #define EXIT_ERROR -84
 int my_printf(char *, ...);
 int parser(char *fmt, va_list args);
@@ -27,7 +25,6 @@ int baby_strlen(char *str);
 char *baby_revstr(char *str);
 int baby_putchar(char c);
 int baby_putstr(char *c);
-int baby_strlen(char *str);
 int baby_intlen(int nb);
 int printf_put_float(va_list args);
 
@@ -35,4 +32,14 @@ typedef struct {
     char flag;
     int (*ptr)(va_list args);
 } handler_t;
+typedef struct {
+    char *fmt;
+    char flag;
+    va_list args;
+    char *built_string;
+    int width;
+    int precision;
+    int length;
+    char specifier;
+} printf_str_t;
 #endif /* MY_H_ */
