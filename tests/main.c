@@ -2,10 +2,11 @@
 #include <string.h>
 #include <stdio.h>
 
-void main(void)
+int main(void)
 {
     int a = 42;
 
-    my_printf("%c", 'M');
+    my_printf("%abcdefghij");
     //printf("%p", &a);
+    return 0;
 }
