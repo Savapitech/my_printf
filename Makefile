@@ -5,27 +5,51 @@
 ## ./Makefile
 ##
 
-NAME	=	libmy.a
+NAME := libmy.a
 
-SRCS = $(wildcard src/*.c)
-SRCS += $(wildcard src/handler/*.c)
-SRCS += $(wildcard src/baby/*.c)
+SRC := $(wildcard src/*.c)
+SRC += $(wildcard src/handler/*.c)
+SRC += $(wildcard src/baby/*.c)
 
-CC = gcc
+BUILD_DIR := .build
 
-all:  $(NAME)
+TEST_SRC := tests/main.c
+TEST_OBJ := $(TEST_SRC:%.c=$(BUILD_DIR)/%.o)
 
-$(NAME):	$(OBJS)
-	$(CC) -Wall -Wextra -c $(SRCS) -Iinclude
-	ar rc $(NAME) *.o
+OBJ := $(SRC:%.c=$(BUILD_DIR)/%.o)
+
+CC := gcc
+
+CFLAGS += -Wall -Wextra
+CFLAGS += -iquote ./include
+CFLAGS += -Wno-unused-parameter
+
+LDFLAGS += -L .
+LDLIBS := -lmy
+
+
+oui: $(NAME)
+
+$(BUILD_DIR)/%.o: %.c
+	@ mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
 
 clean:
-	$(RM) *.o
+	$(RM) $(OBJ)
 
-fclean:	clean
-	$(RM) $(NAME)
+fclean:
+	$(RM) -r $(NAME) $(BUILD_DIR)
 
-re:	fclean all
+.NOTPARALLEL: re
+re:	fclean oui
 
-test: re
-	gcc tests/*.c -L. -lmy -Iinclude -o test
+test: $(NAME) $(TEST_OBJ)
+	$(CC) $(CFLAGS) -o $@ $(TEST_OBJ) $(LDFLAGS) $(LDLIBS)
+
+tests_run: test
+	./$<
+
+.PHONY: all clean fclean re test tests_run
