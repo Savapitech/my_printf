@@ -7,10 +7,10 @@
 
 #include "my.h"
 
-int printf_putstr(va_list args)
+int printf_putstr(flags_t *flags)
 {
     int count = 0;
-    char *str = va_arg(args, char *);
+    char *str = va_arg(flags->args, char *);
 
     for (int i = 0; str[i]; i++)
         count += write(STDOUT_FILENO, &str[i], sizeof(char));

@@ -9,5 +9,6 @@
 
 int baby_putchar(char c)
 {
-    return write(STDOUT_FILENO, &c, sizeof c);
+    return (write(STDOUT_FILENO, &c, sizeof(char)) == sizeof(char))
+        ? (int)(sizeof(char)) : EXIT_ERROR;
 }

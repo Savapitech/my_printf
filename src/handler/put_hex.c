@@ -25,7 +25,7 @@ int baby_put_hex(int nb)
     return (0);
 }
 
-int printf_put_hex(va_list args)
+int printf_put_hex(flags_t *flags)
 {
-    return baby_put_hex(va_arg(args, int));
+    return baby_put_hex(va_arg(flags->args, int));
 }

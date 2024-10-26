@@ -8,9 +8,9 @@
 
 #include "my.h"
 
-int printf_put_pointer(va_list args)
+int printf_put_pointer(flags_t *flags)
 {
-    int src = va_arg(args, int);
+    int src = va_arg(flags->args, int);
 
     baby_put_hex(src);
     return 0;

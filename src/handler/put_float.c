@@ -39,12 +39,12 @@ void printf_put_float2(
             x += baby_put_nbr(decimal[i]);
 }
 
-int printf_put_float(va_list args)
+int printf_put_float(flags_t *flags)
 {
     int x = 0;
-    float nb = va_arg(args, double);
+    float nb = va_arg(flags->args, double);
     int entier = (int)nb;
-    int precision = 6;
+    int precision = flags->precision;
     int decimal[precision];
     int b = 10;
     int tt;

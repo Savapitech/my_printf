@@ -23,7 +23,7 @@ int baby_put_unsigned_nbr(unsigned int nb)
     return 0;
 }
 
-int printf_put_unsigned_nbr(va_list args)
+int printf_put_unsigned_nbr(flags_t *flags)
 {
-    return baby_put_unsigned_nbr(va_arg(args, int));
+    return baby_put_unsigned_nbr(va_arg(flags->args, int));
 }
