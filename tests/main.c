@@ -6,6 +6,6 @@ void main(void)
 {
     int a = 42;
 
-    my_printf("%c", 'M');
-    //printf("%p", &a);
+    my_printf("%p\n", (&a));
+    printf("%p\n", &a);
 }
