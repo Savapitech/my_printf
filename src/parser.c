@@ -5,7 +5,6 @@
 ** parser
 */
 
-#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -46,26 +45,48 @@ void parse_char_settings(flags_t *flags)
 }
 
 static
+void parse_precision(flags_t *flags)
+{
+    if (*flags->fmt == '.') {
+        flags->fmt++;
+        flags->precision = baby_strpnum(&flags->fmt);
+    }
+}
+
+static
+void handle_spec(flags_t *flags)
+{
+    for (size_t i = 0; i < ARRAY_SIZE(HANDLERS); i++) {
+        if (*(flags->fmt) == HANDLERS[i].flag) {
+            flags->spec = *(flags->fmt);
+            HANDLERS[i].ptr(flags);
+            flags->count = flags->spec_buff.count;
+        }
+    }
+}
+
+static
 bool handle_flags(flags_t *flags)
 {
+    static char prefix_buff[4];
+    static char spec_buff[64];
+
     flags->fmt++;
     if (*flags->fmt == '\0')
         return true;
     parse_char_settings(flags);
     flags->width = baby_strpnum(&flags->fmt);
-    if (*flags->fmt == '.') {
-        flags->fmt++;
-        flags->precision = baby_strpnum(&flags->fmt);
-    }
+    parse_precision(flags);
     if (flags->width == ERROR_OVERFLOW || flags->precision == ERROR_OVERFLOW)
         return false;
-    TODO("add len modifier");
-    for (size_t i = 0; i < ARRAY_SIZE(HANDLERS); i++) {
-        if (*(flags->fmt) == HANDLERS[i].flag) {
-            flags->spec = *(flags->fmt);
-            flags->count += HANDLERS[i].ptr(flags);
-        }
-    }
+    flags->spec_buff = (buff_t){ spec_buff, 0 };
+    flags->prefix_buff = (buff_t){ prefix_buff, 0 };
+    handle_spec(flags);
+    if (write(STDOUT_FILENO, flags->spec_buff.str, flags->spec_buff.count) !=
+        flags->spec_buff.count)
+        return false;
+    if (flags->flags & FLAGS_PAD_RIGHT)
+        flags->count += width_printer(flags, flags->spec_buff.count);
     return true;
 }
 

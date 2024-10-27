@@ -6,17 +6,20 @@
 */
 #include "my.h"
 
-int baby_put_nbr(int nb)
+int baby_put_nbr(int nb, flags_t *flags, int i)
 {
     if (nb < 0) {
-        baby_putchar('-');
+        flags->spec_buff.str[i] = '-';
         nb *= -1;
+        i++;
     }
-    if (nb < 10) {
-        baby_putchar(nb + '0');
-    } else {
-        baby_put_nbr(nb / 10);
-        baby_putchar(nb % 10 +'0');
+    if (nb < 10)
+        flags->spec_buff.str[i] = nb + '0';
+    else {
+        i = baby_put_nbr(nb / 10, flags, i);
+        flags->spec_buff.str[i] = nb % 10 + '0';
     }
-    return 0;
+    i++;
+    flags->spec_buff.count = i;
+    return i;
 }

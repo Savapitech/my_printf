@@ -25,7 +25,7 @@ int baby_put_unsigned_nbr(unsigned int nb)
     return baby_intlen(nb, 10);
 }
 
-int printf_put_unsigned_nbr(flags_t *flags)
+void printf_put_unsigned_nbr(flags_t *flags)
 {
-    return baby_put_unsigned_nbr(va_arg(flags->args, int));
+    baby_put_unsigned_nbr(va_arg(flags->args, int));
 }

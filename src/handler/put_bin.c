@@ -6,15 +6,17 @@
 */
 #include "my.h"
 
-int baby_put_bin(int nb)
+void printf_put_bin(flags_t *flags)
 {
+    int nb = va_arg(flags->args, int);
     int result = nb;
     int len = baby_intlen(nb, 2);
     char str[baby_intlen(nb, 2)];
 
     if (nb == 0){
-        baby_putchar('0');
-        return 1;
+        flags->spec_buff.str = "0";
+        flags->spec_buff.count = 1;
+        return;
     }
     for (int i = 0; nb != 0; i++) {
         result = nb % 2;
@@ -23,11 +25,6 @@ int baby_put_bin(int nb)
     }
     str[len] = '\0';
     baby_revstr(str);
-    baby_putstr(str);
-    return len;
-}
-
-int printf_put_bin(flags_t *flags)
-{
-    return baby_put_bin(va_arg(flags->args, int));
+    flags->spec_buff.count = len;
+    flags->spec_buff.str = str;
 }
