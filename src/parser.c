@@ -21,7 +21,7 @@ const handler_t HANDLERS[] = {
     { 'i', &printf_put_nbr },
     { 'u', &printf_put_unsigned_nbr },
     { 'x', &printf_put_hex },
-    { 'X', &printf_put_hex },
+    { 'X', &printf_put_hex_upc },
     { 'o', &printf_put_oct },
     { 'p', &printf_put_pointer },
     { 'f', &printf_put_float },

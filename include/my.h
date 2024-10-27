@@ -60,4 +60,5 @@ int printf_putchar(flags_t *);
 int printf_putpercentage(flags_t *);
 int printf_putstr(flags_t *);
 int printf_put_bin(flags_t *);
+int printf_put_hex_upc(flags_t *);
 #endif /* MY_H_ */
