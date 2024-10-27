@@ -17,10 +17,10 @@ int baby_put_oct(int nb)
     }
     baby_revstr(str);
     baby_putstr(str);
-    return (0);
+    return (baby_strlen(str));
 }
 
-int printf_put_oct(va_list args)
+int printf_put_oct(flags_t *flags)
 {
-    return baby_put_oct(va_arg(args, int));
+    return baby_put_oct(va_arg(flags->args, int));
 }

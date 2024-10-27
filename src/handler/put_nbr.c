@@ -23,7 +23,7 @@ int baby_put_nbr(int nb)
     return 0;
 }
 
-int printf_put_nbr(va_list args)
+int printf_put_nbr(flags_t *flags)
 {
-    return baby_put_nbr(va_arg(args, int));
+    return baby_put_nbr(va_arg(flags->args, int));
 }

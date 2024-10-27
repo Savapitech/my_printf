@@ -1,9 +1,13 @@
 /*
 ** EPITECH PROJECT, 2024
-** point_exa
+** printf
 ** File description:
-** display the adress in hexa
+** parser
 */
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdio.h>
 
 #include "my.h"
 
@@ -23,27 +27,40 @@ const handler_t HANDLERS[] = {
     { '\0', NULL }
 };
 
-int args_parser(char *fmt, va_list args)
+static
+bool handle_flags(flags_t *flags)
 {
-    fmt++;
-    for (int i = 0; HANDLERS[i].ptr; i++)
-        if (*fmt == HANDLERS[i].flag)
-            return (HANDLERS[i].ptr(args));
-    return (0);
+    flags->fmt++;
+    if (*flags->fmt == '\0')
+        return true;
+    for (size_t i = 0; i < ARRAY_SIZE(HANDLERS); i++) {
+        if (*(flags->fmt) == HANDLERS[i].flag) {
+            flags->spec = *(flags->fmt);
+            flags->count += HANDLERS[i].ptr(flags);
+        }
+    }
+    return 0;
 }
 
 int parser(char *fmt, va_list args)
 {
     int count = 0;
+    flags_t flags = { .fmt = fmt, 0 };
 
-    for (; *fmt != '\0'; fmt++) {
-        if (*fmt != '%') {
-            write(STDOUT_FILENO, &*fmt, sizeof(char));
+    va_copy(flags.args, args);
+    for (; *(flags.fmt) != '\0'; flags.fmt++) {
+        if (*(flags.fmt) == '%') {
+            write(STDOUT_FILENO, fmt, sizeof(char) * count);
+            flags.count += count;
+            handle_flags(&flags);
+            count = 0;
+            fmt = flags.fmt;
+        } else
             count++;
-            continue;
-        }
-        count += args_parser(fmt, args);
-        fmt++;
     }
-    return count;
+    if (count != 0) {
+        write(STDOUT_FILENO, fmt, sizeof(char) * count);
+        flags.count += count;
+    }
+    return flags.count;
 }

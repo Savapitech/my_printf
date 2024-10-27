@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-void main(void)
+int main(void)
 {
     int a = 42;
 

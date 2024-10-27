@@ -8,11 +8,11 @@
 #include <stdint.h>
 #include "my.h"
 
-int printf_put_pointer(va_list args)
+int printf_put_pointer(flags_t *flags)
 {
-    baby_putstr("0x");
-    void *src = va_arg(args, void *);
+    uintptr_t src = (uintptr_t)va_arg(flags->args, void *);
 
+    baby_putstr("0x");
     baby_put_hex(src);
     return 0;
 }

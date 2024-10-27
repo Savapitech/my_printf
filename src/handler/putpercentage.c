@@ -7,10 +7,8 @@
 
 #include "my.h"
 
-int printf_putpercentage(va_list args)
+int printf_putpercentage(flags_t *flags)
 {
-    int c = '%';
-
-    (void)args;
-    return (write(STDOUT_FILENO, &c, sizeof(char)));
+    (void)flags;
+    return (write(STDOUT_FILENO, "%", sizeof(char)));
 }
