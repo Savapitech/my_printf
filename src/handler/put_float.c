@@ -4,16 +4,12 @@
 ** File description:
 ** display an int in hexadecimal format
 */
+
 #include <stdio.h>
+
 #include "my.h"
 
-static
-void printf_put_float2(
-    int *decimal,
-    int x,
-    int precision,
-    int entier
-)
+void printf_put_float(flags_t *flags)
 {
     x += baby_put_nbr(entier);
     baby_putchar('.');

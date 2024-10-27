@@ -7,8 +7,10 @@
 
 #include "my.h"
 
-int printf_putpercentage(flags_t *flags)
+void printf_putpercentage(flags_t *flags)
 {
     (void)flags;
-    return (write(STDOUT_FILENO, "%", sizeof(char)));
+    flags->width = 0;
+    flags->spec_buff.str = "%";
+    flags->spec_buff.count = 1;
 }

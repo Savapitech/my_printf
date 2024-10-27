@@ -13,18 +13,23 @@
 static
 const size_t NULL_LEN = sizeof "(null)" - 1;
 
-int printf_putstr(flags_t *flags)
+void printf_putstr(flags_t *flags)
 {
     int count = 0;
     char *str = va_arg(flags->args, char *);
 
-    if (str == NULL && (size_t)flags->precision < NULL_LEN)
-        return write(STDOUT_FILENO, "", sizeof ""), 0;
-    if (str == NULL)
-        return write(STDOUT_FILENO, "(null)", NULL_LEN);
+    if (str == NULL && (size_t)flags->precision < NULL_LEN) {
+        flags->spec_buff.str = "";
+        return;
+    }
+    if (str == NULL) {
+        flags->spec_buff.str = "(null)";
+        flags->spec_buff.count = NULL_LEN;
+        return;
+    }
     if (flags->precision == -1)
         flags->precision = INT_MAX;
-    for (int i = 0; str[i] && i < flags->precision; i++)
-        count += write(STDOUT_FILENO, &str[i], sizeof(char));
-    return (count);
+    for (; str[count] && count < flags->precision; count++);
+    flags->spec_buff.str = str;
+    flags->spec_buff.count = count;
 }

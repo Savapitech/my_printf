@@ -7,10 +7,10 @@
 
 #include "my.h"
 
-int printf_putchar(flags_t *flags)
+void printf_putchar(flags_t *flags)
 {
     int c = va_arg(flags->args, int);
 
-    return (write(STDOUT_FILENO, &c, sizeof(char)) == sizeof(char))
-        ? (int)(sizeof(char)) : EXIT_ERROR;
+    flags->spec_buff.str[0] = c;
+    flags->spec_buff.count = 1;
 }

@@ -6,6 +6,5 @@ int main(void)
 {
     int a = 42;
 
-    my_printf("%o \n", 3301);
-    printf("%o \n", 3301);
+    my_printf("%o", NULL);
 }
