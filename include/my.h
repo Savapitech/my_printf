@@ -59,4 +59,5 @@ int printf_put_unsigned_nbr(flags_t *);
 int printf_putchar(flags_t *);
 int printf_putpercentage(flags_t *);
 int printf_putstr(flags_t *);
+int printf_put_bin(flags_t *);
 #endif /* MY_H_ */
