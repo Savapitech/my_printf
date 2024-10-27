@@ -7,11 +7,13 @@
 
 #ifndef MY_H_
     #define MY_H_
+
     #include <stdarg.h>
     #include <unistd.h>
     #include <ctype.h>
     #include <stddef.h>
     #include <stdint.h>
+
     #define EXIT_ERROR -84
     #define ERROR_OVERFLOW -2
     #define CHAR_TO_DIGIT(c) ((c) & 0xf)
@@ -29,7 +31,9 @@ typedef struct {
     char specifier;
     int count;
     char flags;
+    int written;
 } flags_t;
+
 typedef struct {
     char flag;
     int (*ptr)(flags_t *flags);

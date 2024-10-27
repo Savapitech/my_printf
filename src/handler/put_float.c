@@ -7,58 +7,16 @@
 
 #include "my.h"
 
-static
-int baby_put_nbr(int nb)
-{
-    if (nb < 0) {
-        baby_putchar('-');
-        nb *= -1;
-    }
-    if (nb < 10) {
-        baby_putchar(nb + '0');
-    } else {
-        baby_put_nbr(nb / 10);
-        baby_putchar(nb % 10 +'0');
-    }
-    return 0;
-}
-
-static
-void printf_put_float2(
-    int *decimal,
-    int x,
-    int precision,
-    int entier
-)
-{
-    x += baby_put_nbr(entier);
-    baby_putchar('.');
-    x++;
-    for (int i = 0; i < precision; i++)
-        if (decimal[i] != 0)
-            x += baby_put_nbr(decimal[i]);
-}
-
 int printf_put_float(flags_t *flags)
 {
-    int x = 0;
-    float nb = va_arg(flags->args, double);
-    int entier = (int)nb;
-    int precision = flags->precision;
-    int decimal[precision];
-    int b = 10;
-    int tt;
+    float nbr = va_arg(flags->args, float);
+    int copy = (int)nbr;
 
-    for (int i = 0; i < precision; i++) {
-        tt = (int)(nb * b);
-        decimal[i] = tt % 10;
-        b = b * 10;
-    }
-    if (nb < 0) {
-        baby_putchar('-');
-        nb = nb * -1;
-        entier = nb;
-    }
-    printf_put_float2(decimal, x, precision, entier);
-    return (0);
+    baby_put_nbr(copy);
+    baby_putchar('.');
+    nbr -= (float)copy;
+    for (int i = 0; i < 6; i++)
+        nbr *= 10;
+    copy = (int)nbr;
+    baby_put_nbr(copy);
 }
