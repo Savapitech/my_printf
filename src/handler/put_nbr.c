@@ -10,17 +10,19 @@
 static
 int baby_put_nbr(int nb)
 {
+    int count = 0;
+
     if (nb < 0) {
-        baby_putchar('-');
+        count += baby_putchar('-');
         nb *= -1;
     }
     if (nb < 10) {
-        baby_putchar(nb + '0');
+        count += baby_putchar(nb + '0');
     } else {
-        baby_put_nbr(nb / 10);
-        baby_putchar(nb % 10 +'0');
+        count += baby_put_nbr(nb / 10);
+        count += baby_putchar(nb % 10 +'0');
     }
-    return 0;
+    return count;
 }
 
 int printf_put_nbr(flags_t *flags)

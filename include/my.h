@@ -13,8 +13,10 @@
     #include <stddef.h>
     #include <stdint.h>
     #define EXIT_ERROR -84
+    #define ERROR_OVERFLOW -2
     #define CHAR_TO_DIGIT(c) ((c) & 0xf)
     #define ARRAY_SIZE(array) ((sizeof array) / (sizeof array[0]))
+    #define TODO(s) // renvoie rin
 
 typedef struct {
     char *fmt;
@@ -26,6 +28,7 @@ typedef struct {
     int length;
     char specifier;
     int count;
+    char flags;
 } flags_t;
 typedef struct {
     char flag;
