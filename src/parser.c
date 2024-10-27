@@ -5,6 +5,7 @@
 ** parser
 */
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -28,35 +29,60 @@ const handler_t HANDLERS[] = {
 };
 
 static
+const char CHAR_SETTINGS[] = "-+ 0#";
+
+static
+void parse_char_settings(flags_t *flags)
+{
+    for (int i;;) {
+        i = baby_stridx(CHAR_SETTINGS, *flags->fmt);
+        if (i == -1)
+            break;
+        flags->flags |= 1 << i;
+        flags->fmt++;
+    }
+}
+
+static
 bool handle_flags(flags_t *flags)
 {
     flags->fmt++;
     if (*flags->fmt == '\0')
         return true;
+    parse_char_settings(flags);
+    flags->width = baby_strpnum(&flags->fmt);
+    if (*flags->fmt == '.') {
+        flags->fmt++;
+        flags->precision = baby_strpnum(&flags->fmt);
+    }
+    if (flags->width == ERROR_OVERFLOW || flags->precision == ERROR_OVERFLOW)
+        return false;
+    TODO("add len modifier");
     for (size_t i = 0; i < ARRAY_SIZE(HANDLERS); i++) {
         if (*(flags->fmt) == HANDLERS[i].flag) {
             flags->spec = *(flags->fmt);
             flags->count += HANDLERS[i].ptr(flags);
         }
     }
-    return 0;
+    return true;
 }
 
 int parser(char *fmt, va_list args)
 {
     int count = 0;
-    flags_t flags = { .fmt = fmt, 0 };
+    flags_t flags = { .fmt = fmt, .precision = -1, 0 };
 
     va_copy(flags.args, args);
     for (; *(flags.fmt) != '\0'; flags.fmt++) {
-        if (*(flags.fmt) == '%') {
-            write(STDOUT_FILENO, fmt, sizeof(char) * count);
-            flags.count += count;
-            handle_flags(&flags);
-            count = 0;
-            fmt = flags.fmt;
-        } else
+        if (*(flags.fmt) != '%') {
             count++;
+            continue;
+        }
+        flags.count += write(STDOUT_FILENO, fmt, sizeof(char) * count);
+        if (!handle_flags(&flags))
+            return (-1);
+        count = 0;
+        fmt = flags.fmt;
     }
     if (count != 0) {
         write(STDOUT_FILENO, fmt, sizeof(char) * count);
