@@ -6,6 +6,6 @@ int main(void)
 {
     int a = 42;
 
-    my_printf("%p\n", (&a));
-    printf("%p\n", &a);
+    my_printf("%o\n", 42);
+    printf("%o\n", 42);
 }
