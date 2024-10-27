@@ -11,6 +11,7 @@
     #include <unistd.h>
     #include <ctype.h>
     #include <stddef.h>
+    #include <stdint.h>
     #define EXIT_ERROR -84
     #define CHAR_TO_DIGIT(c) ((c) & 0xf)
     #define ARRAY_SIZE(array) ((sizeof array) / (sizeof array[0]))
@@ -31,24 +32,24 @@ typedef struct {
     int (*ptr)(flags_t *flags);
 } handler_t;
 
-int my_printf(char *, ...);
-int parser(char *, va_list);
-int printf_putchar(flags_t *);
-int printf_putstr(flags_t *);
-int printf_putpercentage(flags_t *);
-int printf_put_nbr(flags_t *);
-int printf_put_unsigned_nbr(flags_t *);
-int printf_put_hex(flags_t *);
-int printf_put_oct(flags_t *);
-int printf_put_pointer(flags_t *);
-int printf_put_float(flags_t *);
-int baby_put_hex(int);
-int baby_strlen(char *);
 char *baby_revstr(char *);
+int baby_getnbr(char const *);
+int baby_put_hex(uintptr_t truc);
 int baby_putchar(char);
 int baby_putstr(char *);
-int baby_intlen(int);
-int baby_getnbr(char const *);
 int baby_stridx(char const *, char);
+int baby_strlen(char *);
+size_t baby_intlen(size_t truc, int);
 int baby_strpnum(char **);
+int my_printf(char *, ...);
+int parser(char *, va_list);
+int printf_put_float(flags_t *);
+int printf_put_hex(flags_t *);
+int printf_put_nbr(flags_t *);
+int printf_put_oct(flags_t *);
+int printf_put_pointer(flags_t *);
+int printf_put_unsigned_nbr(flags_t *);
+int printf_putchar(flags_t *);
+int printf_putpercentage(flags_t *);
+int printf_putstr(flags_t *);
 #endif /* MY_H_ */

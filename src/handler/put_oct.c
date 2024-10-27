@@ -9,7 +9,7 @@
 int baby_put_oct(int nb)
 {
     int result = nb;
-    char str[baby_intlen(nb)];
+    char str[baby_intlen(nb, 8)];
 
     for (int i = 0; nb != 0; i++) {
         result = nb % 8;
