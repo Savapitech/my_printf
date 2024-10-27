@@ -7,9 +7,9 @@
 
 #include "my.h"
 
-int printf_count_char(va_list args)
+int printf_count_char(flags_t *flags)
 {
-    int *count = va_arg(args, int *);
+    int *count = va_arg(flags->args, int *);
 
     *count = flags->written;
 }

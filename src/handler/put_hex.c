@@ -25,7 +25,7 @@ int baby_put_hex(size_t nb)
     str[len] = '\0';
     baby_revstr(str);
     baby_putstr(str);
-    return (0);
+    return len;
 }
 
 int printf_put_hex(flags_t *flags)
