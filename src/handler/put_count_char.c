@@ -12,4 +12,5 @@ int printf_count_char(flags_t *flags)
     int *count = va_arg(flags->args, int *);
 
     *count = flags->written;
+    return *count;
 }

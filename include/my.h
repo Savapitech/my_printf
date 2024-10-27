@@ -41,6 +41,7 @@ typedef struct {
 
 char *baby_revstr(char *);
 int baby_getnbr(char const *);
+int baby_put_nbr(int);
 int baby_put_hex(uintptr_t truc);
 int baby_putchar(char);
 int baby_putstr(char *);
