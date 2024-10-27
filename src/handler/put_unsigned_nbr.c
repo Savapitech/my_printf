@@ -8,24 +8,20 @@
 #include "my.h"
 
 static
-int baby_put_unsigned_nbr(unsigned int nb)
+int baby_put_unsigned_nbr(unsigned int nb, flags_t *flags, int i)
 {
-    unsigned int copy = nb;
-
-    if (nb == 0) {
-        baby_putchar('0');
-        return 1;
+    if (nb < 10)
+        flags->spec_buff.str[i] = nb + '0';
+    else {
+        i = baby_put_nbr(nb / 10, flags, i);
+        flags->spec_buff.str[i] = nb % 10 + '0';
     }
-    if (copy < 10) {
-        baby_putchar(copy + '0');
-    } else {
-        baby_put_unsigned_nbr(copy / 10);
-        baby_putchar(copy % 10 +'0');
-    }
-    return baby_intlen(nb, 10);
+    i++;
+    flags->spec_buff.count = i;
+    return i;
 }
 
 void printf_put_unsigned_nbr(flags_t *flags)
 {
-    baby_put_unsigned_nbr(va_arg(flags->args, int));
+    baby_put_unsigned_nbr(va_arg(flags->args, int), flags, 0);
 }
