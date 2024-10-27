@@ -4,9 +4,6 @@
 
 int main(void)
 {
-    int a = 42;
-
-    my_printf("%abcdefghij");
-    //printf("%p", &a);
+    my_printf("%10%", NULL);
     return 0;
 }

@@ -13,16 +13,18 @@
     #include <stddef.h>
     #define EXIT_ERROR -84
     #define CHAR_TO_DIGIT(c) ((c) & 0xf)
+    #define ARRAY_SIZE(array) ((sizeof array) / (sizeof array[0]))
 
 typedef struct {
     char *fmt;
-    char flag;
+    char spec;
     va_list args;
     char *built_string;
     int width;
     int precision;
     int length;
     char specifier;
+    int count;
 } flags_t;
 typedef struct {
     char flag;
