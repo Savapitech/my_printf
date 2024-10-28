@@ -29,5 +29,12 @@ int baby_put_oct(int nb, flags_t *flags)
 
 void printf_put_oct(flags_t *flags)
 {
-    baby_put_oct(va_arg(flags->args, int), flags);
+    int nb = va_arg(flags->args, int);
+
+    if (nb == 0) {
+        flags->spec_buff.str = "0";
+        flags->spec_buff.count = 1;
+        return;
+    }
+    baby_put_oct(nb, flags);
 }

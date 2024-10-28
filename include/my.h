@@ -47,11 +47,11 @@ typedef struct {
 } handler_t;
 
 typedef enum {
-    FLAGS_ALT_FORM = 1 << 0,
-    FLAGS_PAD_ZERO = 1 << 1,
+    FLAGS_ALT_FORM = 1 << 4,
+    FLAGS_PAD_ZERO = 1 << 3,
     FLAGS_SET_SPACE = 1 << 2,
-    FLAGS_PUT_SIGN = 1 << 3,
-    FLAGS_PAD_RIGHT = 1 << 4
+    FLAGS_PUT_SIGN = 1 << 1,
+    FLAGS_PAD_RIGHT = 1 << 0
 } flags_bit_shifts_t;
 
 char *baby_revstr(char *);
