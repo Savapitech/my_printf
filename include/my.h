@@ -13,6 +13,7 @@
     #include <stddef.h>
     #include <stdint.h>
     #include <unistd.h>
+    #include <stdbool.h>
 
     #define EXIT_ERROR -84
     #define ERROR_OVERFLOW -2
@@ -33,7 +34,6 @@ typedef struct {
     int width;
     int precision;
     int length;
-    char specifier;
     int count;
     char flags;
     int written;
@@ -78,4 +78,5 @@ void printf_putstr(flags_t *);
 void printf_put_bin(flags_t *);
 void printf_put_hex_upc(flags_t *);
 int width_printer(flags_t *, int);
+void baby_put_inf(char);
 #endif /* MY_H_ */

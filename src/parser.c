@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "my.h"
 
@@ -26,6 +27,7 @@ const handler_t HANDLERS[] = {
     { 'f', &printf_put_float },
     { 'b', &printf_put_bin },
     { 'B', &printf_put_bin },
+    { 'F', &printf_put_float},
     { '\0', NULL }
 };
 
