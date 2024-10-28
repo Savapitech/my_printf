@@ -82,9 +82,9 @@ bool handle_flags(flags_t *flags)
     flags->spec_buff = (buff_t){ spec_buff, 0 };
     flags->prefix_buff = (buff_t){ prefix_buff, 0 };
     handle_spec(flags);
-    if (write(STDOUT_FILENO, flags->spec_buff.str, flags->spec_buff.count) !=
-        flags->spec_buff.count)
-        return false;
+    if (!(flags->flags & FLAGS_PAD_RIGHT))
+        flags->count += width_printer(flags, flags->spec_buff.count);
+    write(STDOUT_FILENO, flags->spec_buff.str, flags->spec_buff.count);
     if (flags->flags & FLAGS_PAD_RIGHT)
         flags->count += width_printer(flags, flags->spec_buff.count);
     return true;
