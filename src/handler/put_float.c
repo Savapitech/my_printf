@@ -21,16 +21,31 @@ int choose_prec_neg(flags_t *flags, int nbr, int copy)
     return flags->precision;
 }
 
+static
+void inf_or_nan(double nbr, flags_t *flags)
+{
+    if (nbr < 0){
+        flags->prefix_buff.str[0] = '-';
+        flags->prefix_buff.count = 1;
+    }
+    if (isinf(nbr))
+        baby_put_inf(flags);
+    if (isnan(nbr))
+        baby_put_nan(flags);
+}
+
 void printf_put_float(flags_t *flags)
 {
     double nbr = va_arg(flags->args, double);
     int copy = (int)nbr;
     int precision = choose_prec_neg(flags, nbr, copy);
     int i = 0;
-    if (nbr == INFINITY){
-        baby_put_inf(flags->spec);
-        flags->spec_buff.count = 3;
-        return;
+
+    if (isnan(nbr) || isinf(nbr))
+        return inf_or_nan(nbr, flags);
+    if (nbr < 0 && copy == 0) {
+        flags->prefix_buff.str = "-";
+        flags->prefix_buff.count = 1;
     }
     i = baby_put_nbr(copy, flags, i);
     flags->spec_buff.str[i] = '.';
@@ -42,4 +57,3 @@ void printf_put_float(flags_t *flags)
     }
     flags->spec_buff.count = i;
 };
- 

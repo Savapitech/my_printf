@@ -9,10 +9,11 @@
 
 #include <math.h>
 
-void baby_put_inf(char spec)
+void baby_put_inf(flags_t *flags)
 {
-    if (isupper(spec))
-        baby_putstr("INF");
-    if (!isupper(spec))
-        baby_putstr("inf");
+    if (isupper(flags->spec))
+        flags->spec_buff.str = "INF";
+    else
+        flags->spec_buff.str = "inf";
+    flags->spec_buff.count = 3;
 }

@@ -78,5 +78,6 @@ void printf_putstr(flags_t *);
 void printf_put_bin(flags_t *);
 void printf_put_hex_upc(flags_t *);
 int width_printer(flags_t *, int);
-void baby_put_inf(char);
+void baby_put_inf(flags_t *);
+void baby_put_nan(flags_t *);
 #endif /* MY_H_ */
