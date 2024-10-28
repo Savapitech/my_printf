@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "my.h"
 
@@ -26,6 +27,7 @@ const handler_t HANDLERS[] = {
     { 'f', &printf_put_float },
     { 'b', &printf_put_bin },
     { 'B', &printf_put_bin },
+    { 'F', &printf_put_float},
     { '\0', NULL }
 };
 
@@ -61,8 +63,20 @@ void handle_spec(flags_t *flags)
             flags->spec = *(flags->fmt);
             HANDLERS[i].ptr(flags);
             flags->count = flags->spec_buff.count;
+            flags->count += flags->prefix_buff.count;
         }
     }
+}
+
+static
+void print_buffers(flags_t *flags)
+{
+    if (!(flags->flags & FLAGS_PAD_RIGHT))
+        flags->count += width_printer(flags, flags->count);
+    write(STDOUT_FILENO, flags->prefix_buff.str, flags->prefix_buff.count);
+    write(STDOUT_FILENO, flags->spec_buff.str, flags->spec_buff.count);
+    if (flags->flags & FLAGS_PAD_RIGHT)
+        flags->count += width_printer(flags, flags->count);
 }
 
 static
@@ -82,11 +96,7 @@ bool handle_flags(flags_t *flags)
     flags->spec_buff = (buff_t){ spec_buff, 0 };
     flags->prefix_buff = (buff_t){ prefix_buff, 0 };
     handle_spec(flags);
-    if (!(flags->flags & FLAGS_PAD_RIGHT))
-        flags->count += width_printer(flags, flags->spec_buff.count);
-    write(STDOUT_FILENO, flags->spec_buff.str, flags->spec_buff.count);
-    if (flags->flags & FLAGS_PAD_RIGHT)
-        flags->count += width_printer(flags, flags->spec_buff.count);
+    print_buffers(flags);
     return true;
 }
 
