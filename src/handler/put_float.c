@@ -35,6 +35,19 @@ void inf_or_nan(double nbr, flags_t *flags)
 }
 
 static
+void put_sign(flags_t *flags, double nbr, int copy)
+{
+    if (flags->flags & FLAGS_PUT_SIGN) {
+        flags->prefix_buff.str = "+";
+        flags->prefix_buff.count = 1;
+    }
+    if (nbr < 0 && copy == 0) {
+        flags->prefix_buff.str = "-";
+        flags->prefix_buff.count = 1;
+    }
+}
+
+static
 int put_point(flags_t *flags, int i)
 {
     if (flags->precision > 0 || flags->precision == -1) {
@@ -53,10 +66,7 @@ void printf_put_float(flags_t *flags)
 
     if (isnan(nbr) || isinf(nbr))
         return inf_or_nan(nbr, flags);
-    if (nbr < 0 && copy == 0) {
-        flags->prefix_buff.str = "-";
-        flags->prefix_buff.count = 1;
-    }
+    put_sign(flags, nbr, copy);
     i = baby_put_nbr(copy, flags, i);
     i += put_point(flags, i);
     nbr -= copy;

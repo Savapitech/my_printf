@@ -20,7 +20,7 @@
     #define CHAR_TO_DIGIT(c) ((c) & 0xf)
     #define ARRAY_SIZE(array) ((sizeof array) / (sizeof array[0]))
     #define TODO(s) // renvoie rin
-
+    #define ABS(v) (((v) < (0)) ? -(v) : (v))
 
 typedef struct {
     char *str;

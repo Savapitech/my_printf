@@ -54,6 +54,8 @@ void printf_put_hex(flags_t *flags)
 {
     size_t nb = (size_t)va_arg(flags->args, void *);
 
+    if (flags->precision == 0 && nb == 0)
+        return;
     if (nb == 0) {
         flags->spec_buff.str = "0";
         flags->spec_buff.count = 1;
