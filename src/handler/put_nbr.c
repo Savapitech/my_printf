@@ -9,5 +9,7 @@
 
 void printf_put_nbr(flags_t *flags)
 {
+    if (flags->precision == 0)
+        return;
     baby_put_nbr(va_arg(flags->args, int), flags, 0);
 }

@@ -8,7 +8,6 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <math.h>
 
 #include "my.h"
 
@@ -56,7 +55,7 @@ void parse_precision(flags_t *flags)
 }
 
 static
-void handle_spec(flags_t *flags)
+void check_spec(flags_t *flags)
 {
     for (size_t i = 0; i < ARRAY_SIZE(HANDLERS); i++) {
         if (*(flags->fmt) == HANDLERS[i].flag) {
@@ -65,6 +64,17 @@ void handle_spec(flags_t *flags)
             flags->count = flags->spec_buff.count;
             flags->count += flags->prefix_buff.count;
         }
+    }
+}
+
+static
+void handle_spec(flags_t *flags)
+{
+    for (; !flags->spec; flags->fmt++) {
+        if (isalpha(*flags->fmt) || *flags->fmt == '%')
+            check_spec(flags);
+        else
+            break;
     }
 }
 

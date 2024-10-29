@@ -7,10 +7,9 @@
 
 #include "my.h"
 
-#include <math.h>
-
 void baby_put_inf(flags_t *flags)
 {
+    flags->flags &= ~FLAGS_PAD_ZERO;
     if (isupper(flags->spec))
         flags->spec_buff.str = "INF";
     else

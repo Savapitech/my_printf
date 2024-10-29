@@ -15,7 +15,7 @@ int choose_prec_neg(flags_t *flags, int nbr, int copy)
     if (flags->precision == -1)
         flags->precision = 6;
     if (nbr < 0 && copy == 0) {
-        flags->prefix_buff.str[0] = '-';
+        flags->prefix_buff.str = "-";
         flags->prefix_buff.count = 1;
     }
     return flags->precision;
@@ -25,7 +25,7 @@ static
 void inf_or_nan(double nbr, flags_t *flags)
 {
     if (nbr < 0){
-        flags->prefix_buff.str[0] = '-';
+        flags->prefix_buff.str = "-";
         flags->prefix_buff.count = 1;
     }
     if (isinf(nbr))

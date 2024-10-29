@@ -8,6 +8,7 @@
 
 void baby_put_nan(flags_t *flags)
 {
+    flags->flags &= ~FLAGS_PAD_ZERO;
     if (isupper(flags->spec))
         flags->spec_buff.str = "NAN";
     else
