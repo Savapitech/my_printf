@@ -34,6 +34,16 @@ void inf_or_nan(double nbr, flags_t *flags)
         baby_put_nan(flags);
 }
 
+static
+int put_point(flags_t *flags, int i)
+{
+    if (flags->precision > 0 || flags->precision == -1) {
+        flags->spec_buff.str[i] = '.';
+        return 1;
+    }
+    return 0;
+}
+
 void printf_put_float(flags_t *flags)
 {
     double nbr = va_arg(flags->args, double);
@@ -48,8 +58,7 @@ void printf_put_float(flags_t *flags)
         flags->prefix_buff.count = 1;
     }
     i = baby_put_nbr(copy, flags, i);
-    flags->spec_buff.str[i] = '.';
-    i++;
+    i += put_point(flags, i);
     nbr -= copy;
     for (int j = 0; j < precision; j++) {
         nbr = (nbr - (int)nbr) * 10;
