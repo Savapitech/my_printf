@@ -31,6 +31,8 @@ void printf_put_oct(flags_t *flags)
 {
     int nb = va_arg(flags->args, int);
 
+    if (flags->precision == 0 && nb == 0)
+        return;
     if (nb == 0) {
         flags->spec_buff.str = "0";
         flags->spec_buff.count = 1;

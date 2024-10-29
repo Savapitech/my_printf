@@ -8,10 +8,6 @@
 
 int baby_put_nbr(int nb, flags_t *flags, int i)
 {
-    if (flags->flags & FLAGS_PUT_SIGN) {
-        flags->prefix_buff.str = "+";
-        flags->prefix_buff.count = 1;
-    }
     if (nb < 0) {
         flags->prefix_buff.str = "-";
         flags->prefix_buff.count = 1;
