@@ -6,5 +6,5 @@ int main(void)
 {
     int a = 42;
 
-    my_printf("%o", NULL);
+    my_printf("%s pad 3: %.3s %d", "youpii", "youpii", 42);
 }
