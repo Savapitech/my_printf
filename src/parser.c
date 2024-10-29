@@ -61,7 +61,7 @@ void check_spec(flags_t *flags)
         if (*(flags->fmt) == HANDLERS[i].flag) {
             flags->spec = *(flags->fmt);
             HANDLERS[i].ptr(flags);
-            flags->count = flags->spec_buff.count;
+            flags->count += flags->spec_buff.count;
             flags->count += flags->prefix_buff.count;
         }
     }
@@ -70,12 +70,9 @@ void check_spec(flags_t *flags)
 static
 void handle_spec(flags_t *flags)
 {
-    for (; !flags->spec; flags->fmt++) {
-        if (isalpha(*flags->fmt) || *flags->fmt == '%')
-            check_spec(flags);
-        else
-            break;
-    }
+    for (; baby_stridx("hjltzL", *flags->fmt) != -1; flags->fmt++);
+    if (isalpha(*flags->fmt) || *flags->fmt == '%')
+        check_spec(flags);
 }
 
 static
@@ -128,7 +125,7 @@ int parser(char *fmt, va_list args)
         if (!handle_flags(&flags))
             return (-1);
         count = 0;
-        fmt = flags.fmt;
+        fmt = flags.fmt + 1;
     }
     if (count != 0) {
         write(STDOUT_FILENO, fmt, sizeof(char) * count);
