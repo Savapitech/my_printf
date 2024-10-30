@@ -37,6 +37,10 @@ void inf_or_nan(double nbr, flags_t *flags)
 static
 void put_sign(flags_t *flags, double nbr, int copy)
 {
+    if (flags->flags & FLAGS_SET_SPACE) {
+        flags->prefix_buff.str = " ";
+        flags->prefix_buff.count = 1;
+    }
     if (flags->flags & FLAGS_PUT_SIGN) {
         flags->prefix_buff.str = "+";
         flags->prefix_buff.count = 1;
