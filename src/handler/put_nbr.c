@@ -5,12 +5,18 @@
 ** display the number given as parameter
 */
 
+#include <stdio.h>
+
 #include "my.h"
 
 void printf_put_nbr(flags_t *flags)
 {
     int nb = va_arg(flags->args, int);
 
+    if (flags->flags & FLAGS_SET_SPACE) {
+        flags->prefix_buff.str = " ";
+        flags->prefix_buff.count = 1;
+    }
     if (flags->flags & FLAGS_PUT_SIGN) {
         flags->prefix_buff.str = "+";
         flags->prefix_buff.count = 1;
