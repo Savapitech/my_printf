@@ -62,9 +62,8 @@ int put_point(flags_t *flags, int i)
     return 0;
 }
 
-void printf_put_float(flags_t *flags)
+void baby_put_float(double nbr, flags_t *flags)
 {
-    double nbr = va_arg(flags->args, double);
     int copy = (int)nbr;
     int precision = choose_prec_neg(flags, nbr, copy);
     int i = 0;
@@ -80,4 +79,9 @@ void printf_put_float(flags_t *flags)
         i = baby_put_nbr((int)(nbr < 0 ? - nbr : nbr), flags, i);
     }
     flags->spec_buff.count = i;
+}
+
+void printf_put_float(flags_t *flags)
+{
+    baby_put_float(va_arg(flags->args, double), flags);
 };
