@@ -57,7 +57,7 @@ typedef enum {
 char *baby_revstr(char *);
 int baby_getnbr(char const *);
 int baby_put_nbr(int, flags_t *, int);
-int baby_put_hex(size_t nb, flags_t *);
+int baby_put_hex(size_t nb, flags_t *, int);
 int baby_putchar(char);
 int baby_putstr(char *);
 int baby_stridx(char const *, char);
