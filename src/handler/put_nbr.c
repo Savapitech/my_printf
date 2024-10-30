@@ -5,8 +5,6 @@
 ** display the number given as parameter
 */
 
-#include <stdio.h>
-
 #include "my.h"
 
 void printf_put_nbr(flags_t *flags)
