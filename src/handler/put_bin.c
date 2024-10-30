@@ -26,5 +26,5 @@ void printf_put_bin(flags_t *flags)
     str[len] = '\0';
     baby_revstr(str);
     flags->spec_buff.count = len;
-    flags->spec_buff.str = str;
+    baby_strcpy(flags->spec_buff.str, str);
 }

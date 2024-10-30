@@ -38,5 +38,11 @@ void printf_put_oct(flags_t *flags)
         flags->spec_buff.count = 1;
         return;
     }
+    if (flags->precision > 0) {
+        if (flags->flags & FLAGS_PAD_RIGHT)
+            flags->flags &= ~FLAGS_PAD_RIGHT;
+        flags->flags |= FLAGS_PAD_ZERO;
+        flags->width = flags->precision;
+    }
     baby_put_oct(nb, flags);
 }
