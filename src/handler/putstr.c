@@ -32,4 +32,6 @@ void printf_putstr(flags_t *flags)
     for (; str[count] && count < flags->precision; count++);
     flags->spec_buff.str = str;
     flags->spec_buff.count = count;
+    if (flags->precision == INT_MAX)
+        flags->precision = -1;
 }
