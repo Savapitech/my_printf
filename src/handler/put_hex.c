@@ -50,6 +50,7 @@ int baby_put_hex_upc(size_t nb, flags_t *flags, int i)
 
 void printf_put_hex(flags_t *flags)
 {
+    int i = 0;
     size_t nb = (size_t)va_arg(flags->args, void *);
 
     if (flags->precision == 0 && nb == 0)
@@ -59,8 +60,14 @@ void printf_put_hex(flags_t *flags)
         flags->spec_buff.count = 1;
         return;
     }
+    if (flags->precision > 0) {
+        if (flags->flags & FLAGS_PAD_RIGHT)
+            flags->flags &= ~FLAGS_PAD_RIGHT;
+        flags->flags |= FLAGS_PAD_ZERO;
+        flags->width = flags->precision;
+    }
     if (isupper(flags->spec))
-        baby_put_hex_upc(nb, flags, 0);
+        baby_put_hex_upc(nb, flags, i);
     else
-        baby_put_hex(nb, flags, 0);
+        baby_put_hex(nb, flags, i);
 }

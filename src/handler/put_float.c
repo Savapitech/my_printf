@@ -57,6 +57,16 @@ int put_point(flags_t *flags, int i)
     return 0;
 }
 
+void round_float(flags_t *flags, int i)
+{
+    int a = i;
+        for (; flags->spec_buff.str[a] == 9; a--) {
+            flags->spec_buff.str[a] = '0';
+    }
+    flags->spec_buff.str[a]++;
+    flags->spec_buff.count = i;
+}
+
 void printf_put_float(flags_t *flags)
 {
     double nbr = va_arg(flags->args, double);
@@ -74,5 +84,5 @@ void printf_put_float(flags_t *flags)
         nbr = (nbr - (int)nbr) * 10;
         i = baby_put_nbr((int)(nbr < 0 ? - nbr : nbr), flags, i);
     }
-    flags->spec_buff.count = i;
+    round_float(flags, i);
 };
