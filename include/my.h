@@ -81,4 +81,6 @@ int width_printer(flags_t *, int);
 void baby_put_inf(flags_t *);
 void baby_put_nan(flags_t *);
 char *baby_strcpy(char *, char const *);
+void printf_put_scientific(flags_t *);
+void baby_put_float(double, flags_t *);
 #endif /* MY_H_ */

@@ -37,6 +37,10 @@ void inf_or_nan(double nbr, flags_t *flags)
 static
 void put_sign(flags_t *flags, double nbr, int copy)
 {
+    if (flags->flags & FLAGS_SET_SPACE) {
+        flags->prefix_buff.str = " ";
+        flags->prefix_buff.count = 1;
+    }
     if (flags->flags & FLAGS_PUT_SIGN) {
         flags->prefix_buff.str = "+";
         flags->prefix_buff.count = 1;
@@ -50,26 +54,16 @@ void put_sign(flags_t *flags, double nbr, int copy)
 static
 int put_point(flags_t *flags, int i)
 {
-    if (flags->precision > 0 || flags->precision == -1) {
+    if (flags->precision > 0 || flags->precision == -1 ||
+        flags->flags & FLAGS_ALT_FORM) {
         flags->spec_buff.str[i] = '.';
         return 1;
     }
     return 0;
 }
 
-void round_float(flags_t *flags, int i)
+void baby_put_float(double nbr, flags_t *flags)
 {
-    int a = i;
-        for (; flags->spec_buff.str[a] == 9; a--) {
-            flags->spec_buff.str[a] = '0';
-    }
-    flags->spec_buff.str[a]++;
-    flags->spec_buff.count = i;
-}
-
-void printf_put_float(flags_t *flags)
-{
-    double nbr = va_arg(flags->args, double);
     int copy = (int)nbr;
     int precision = choose_prec_neg(flags, nbr, copy);
     int i = 0;
@@ -84,5 +78,10 @@ void printf_put_float(flags_t *flags)
         nbr = (nbr - (int)nbr) * 10;
         i = baby_put_nbr((int)(nbr < 0 ? - nbr : nbr), flags, i);
     }
-    round_float(flags, i);
+    flags->spec_buff.count = i;
+}
+
+void printf_put_float(flags_t *flags)
+{
+    baby_put_float(va_arg(flags->args, double), flags);
 };
