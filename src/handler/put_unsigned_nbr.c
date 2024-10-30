@@ -23,5 +23,11 @@ int baby_put_unsigned_nbr(unsigned int nb, flags_t *flags, int i)
 
 void printf_put_unsigned_nbr(flags_t *flags)
 {
+    if (flags->precision > 0) {
+        if (flags->flags & FLAGS_PAD_RIGHT)
+            flags->flags &= ~FLAGS_PAD_RIGHT;
+        flags->flags |= FLAGS_PAD_ZERO;
+        flags->width = flags->precision;
+    }
     baby_put_unsigned_nbr(va_arg(flags->args, int), flags, 0);
 }
