@@ -54,7 +54,8 @@ void put_sign(flags_t *flags, double nbr, int copy)
 static
 int put_point(flags_t *flags, int i)
 {
-    if (flags->precision > 0 || flags->precision == -1) {
+    if (flags->precision > 0 || flags->precision == -1 ||
+        flags->flags & FLAGS_ALT_FORM) {
         flags->spec_buff.str[i] = '.';
         return 1;
     }
