@@ -16,8 +16,8 @@ void printf_put_pointer(flags_t *flags)
     char *old_spec_buff_str;
 
     old_spec_buff_str = flags->spec_buff.str;
-    flags->spec_buff.str = "0x";
-    flags->spec_buff.str += 2;
-    baby_put_hex(src, flags);
+    flags->spec_buff.str[0] = '0';
+    flags->spec_buff.str[1] = 'x';
+    baby_put_hex(src, flags, 3);
     flags->spec_buff.str = old_spec_buff_str;
 }

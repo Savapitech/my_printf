@@ -7,11 +7,10 @@
 
 #include "my.h"
 
-int baby_put_hex(size_t nb, flags_t *flags)
+int baby_put_hex(size_t nb, flags_t *flags, int i)
 {
     size_t result = (size_t)nb;
     char str[64];
-    int i = 0;
 
     for (; nb != 0; i++) {
         result = nb % 16;
@@ -25,15 +24,14 @@ int baby_put_hex(size_t nb, flags_t *flags)
     baby_revstr(str);
     baby_strcpy(flags->spec_buff.str, str);
     flags->spec_buff.count = i;
-    return 0;
+    return i;
 }
 
 static
-int baby_put_hex_upc(size_t nb, flags_t *flags)
+int baby_put_hex_upc(size_t nb, flags_t *flags, int i)
 {
     size_t result = (size_t)nb;
     char str[64];
-    int i = 0;
 
     for (; nb != 0; i++) {
         result = nb % 16;
@@ -52,6 +50,7 @@ int baby_put_hex_upc(size_t nb, flags_t *flags)
 
 void printf_put_hex(flags_t *flags)
 {
+    int i = 0;
     size_t nb = (size_t)va_arg(flags->args, void *);
 
     if (flags->precision == 0 && nb == 0)
@@ -61,8 +60,14 @@ void printf_put_hex(flags_t *flags)
         flags->spec_buff.count = 1;
         return;
     }
+    if (flags->precision > 0) {
+        if (flags->flags & FLAGS_PAD_RIGHT)
+            flags->flags &= ~FLAGS_PAD_RIGHT;
+        flags->flags |= FLAGS_PAD_ZERO;
+        flags->width = flags->precision;
+    }
     if (isupper(flags->spec))
-        baby_put_hex_upc(nb, flags);
+        baby_put_hex_upc(nb, flags, i);
     else
-        baby_put_hex(nb, flags);
+        baby_put_hex(nb, flags, i);
 }
