@@ -62,6 +62,19 @@ int put_point(flags_t *flags, int i)
     return 0;
 }
 
+static
+void round_float(flags_t *flags, int i)
+{
+    int a = i - 1;
+
+    for (; isdigit(flags->spec_buff.str[a]) &&
+        flags->spec_buff.str[a] >= '5'; a--) {
+        flags->spec_buff.str[a] = '0';
+    }
+    if (isdigit(flags->spec_buff.str[a]))
+        flags->spec_buff.str[a]++;
+}
+
 void baby_put_float(double nbr, flags_t *flags)
 {
     int copy = (int)nbr;
@@ -74,11 +87,12 @@ void baby_put_float(double nbr, flags_t *flags)
     i = baby_put_nbr(copy, flags, i);
     i += put_point(flags, i);
     nbr -= copy;
-    for (int j = 0; j < precision; j++) {
+    for (int j = 0; j < precision + 1; j++) {
         nbr = (nbr - (int)nbr) * 10;
         i = baby_put_nbr((int)(nbr < 0 ? - nbr : nbr), flags, i);
     }
-    flags->spec_buff.count = i;
+    round_float(flags, i);
+    flags->spec_buff.count = i - 1;
 }
 
 void printf_put_float(flags_t *flags)
