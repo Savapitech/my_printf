@@ -83,12 +83,14 @@ void print_buffers(flags_t *flags)
     if (flags->flags & FLAGS_PAD_ZERO)
         write(STDOUT_FILENO, flags->prefix_buff.str, flags->prefix_buff.count);
     if (!(flags->flags & FLAGS_PAD_RIGHT))
-        flags->count += width_printer(flags, flags->count);
+        flags->count += width_printer(flags, flags->spec_buff.count +
+        flags->prefix_buff.count);
     if (!(flags->flags & FLAGS_PAD_ZERO))
         write(STDOUT_FILENO, flags->prefix_buff.str, flags->prefix_buff.count);
     write(STDOUT_FILENO, flags->spec_buff.str, flags->spec_buff.count);
     if (flags->flags & FLAGS_PAD_RIGHT)
-        flags->count += width_printer(flags, flags->count);
+        flags->count += width_printer(flags, flags->spec_buff.count +
+        flags->prefix_buff.count);
 }
 
 static
