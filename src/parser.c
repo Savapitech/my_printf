@@ -27,6 +27,8 @@ const handler_t HANDLERS[] = {
     { 'B', &printf_put_bin },
     { 'F', &printf_put_float},
     { 'p', &printf_put_pointer},
+    { 'e', &printf_put_scientific },
+    { 'E', &printf_put_scientific },
     { '\0', NULL }
 };
 
