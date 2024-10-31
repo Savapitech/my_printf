@@ -26,6 +26,7 @@ const handler_t HANDLERS[] = {
     { 'b', &printf_put_bin },
     { 'B', &printf_put_bin },
     { 'F', &printf_put_float},
+    { 'p', &printf_put_pointer},
     { '\0', NULL }
 };
 
@@ -94,6 +95,9 @@ bool handle_flags(flags_t *flags)
     static char prefix_buff[4];
     static char spec_buff[64];
 
+    flags->flags = 0;
+    flags->width = 0;
+    flags->precision = -1;
     flags->fmt++;
     if (*flags->fmt == '\0')
         return true;
