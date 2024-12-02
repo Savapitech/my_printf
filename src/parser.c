@@ -52,6 +52,11 @@ void parse_precision(flags_t *flags)
 {
     if (*flags->fmt == '.') {
         flags->fmt++;
+        if (*flags->fmt == '*') {
+            flags->fmt++;
+            flags->precision = va_arg(flags->args, int);
+            return;
+        }
         flags->precision = baby_strpnum(&flags->fmt);
     }
 }
@@ -94,6 +99,17 @@ void print_buffers(flags_t *flags)
 }
 
 static
+void parse_width(flags_t *flags)
+{
+    if (*flags->fmt == '*') {
+        flags->fmt++;
+        flags->width = va_arg(flags->args, int);
+        return;
+    }
+    flags->width = baby_strpnum(&flags->fmt);
+}
+
+static
 bool handle_flags(flags_t *flags)
 {
     static char prefix_buff[4];
@@ -106,7 +122,7 @@ bool handle_flags(flags_t *flags)
     if (*flags->fmt == '\0')
         return true;
     parse_char_settings(flags);
-    flags->width = baby_strpnum(&flags->fmt);
+    parse_width(flags);
     parse_precision(flags);
     if (flags->width == ERROR_OVERFLOW || flags->precision == ERROR_OVERFLOW)
         return false;
